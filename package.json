@@ -1,0 +1,20 @@
+{
+  "name": "fis273",
+  "version": "1.1.2",
+  "description": "基于FIS3的前端资源管理方案",
+  "keywords" : "fis3",
+  "main": "index.js",
+  "bin": {
+    "fis273": "bin/fis273.js"
+  },
+  "author": "273-UED",
+  "dependencies": {
+    "fis-parser-less": "^0.1.3",
+    "liftoff": "^2.1.0",
+    "minimist": "^1.1.1",
+    "fis3": "~3.2.0",
+    "fis3-hook-module": "~1.2.2",
+    "fis3-hook-commonjs": "~0.1.0",
+    "fis3-postpackager-loader": "~1.3.2"
+  }
+}
