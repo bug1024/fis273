@@ -3,6 +3,15 @@ fis.require.prefixes.unshift('fis273');
 fis.cli.name = 'fis273';
 fis.cli.info = require('./package.json');
 
+// 忽略文件
+fis.set('project.ignore', [
+    'output/**',
+    'node_nodules/**',
+    '.git/**',
+    '.svn/**',
+    '*.md'
+]);
+
 // 公共模式
 fis
     // 应用模块
@@ -52,11 +61,12 @@ fis.media('debug')
 
 // 测试环境
 fis.media('test')
-    // 发布路径
+    // 发布到测试机
     .match('*', {
         release : '$0',
-        deploy : fis.plugin('local-deliver', {
-            to : '/fis/test'
+        deploy: fis.plugin('http-push', {
+            receiver: 'http://172.16.1.141/rcv.php',
+            to: '/www/asset'
         })
     });
 
