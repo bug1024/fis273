@@ -1,6 +1,6 @@
 {
   "name": "fis273",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "基于FIS3的前端资源管理方案",
   "keywords" : "fis3",
   "main": "index.js",
