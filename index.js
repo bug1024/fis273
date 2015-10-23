@@ -8,6 +8,7 @@ fis.set('project.ignore', [
     'output/**',
     'node_nodules/**',
     '.git/**',
+    'fis273-conf.js',
     '.svn/**',
     '*.md'
 ]);
@@ -29,14 +30,14 @@ fis
         isMod : true
     })
 
-    // 非模块
-    .match('static/**', {
+    // 两个下划线开头js文件为非模块
+    .match(/__.*\.js$/, {
         isMod : false
     })
 
-    // 打包
-    .match('pkg/**.js', {
-        isMod : true
+    // 图片纳入map.json
+    .match('image', {
+        useMap : true
     })
 
     // 模块化加载方式 modJS
@@ -59,18 +60,59 @@ fis.media('debug')
         })
     });
 
-// 测试环境
-fis.media('test')
-    // 发布到测试机
+// 本地环境
+fis.media('local')
+    // 发布路径
     .match('*', {
         release : '$0',
-        deploy: fis.plugin('http-push', {
-            receiver: 'http://172.16.1.141/rcv.php',
-            to: '/www/asset'
+        deploy : fis.plugin('local-deliver', {
+            to : '/fis/local'
         })
     });
 
-// 生产环境
+// 测试环境
+fis.media('test')
+    // 发布路径
+    .match('*', {
+        release : '$0',
+        deploy : fis.plugin('local-deliver', {
+            to : '/fis/test'
+        })
+    });
+
+// 模拟环境
+fis.media('sim')
+    // js压缩、加版本号
+    .match('*.js', {
+        useHash : true,
+        optimizer : fis.plugin('uglify-js')
+    })
+
+    // css压缩、加版本号
+    .match('*.css', {
+        useHash : true,
+        optimizer : fis.plugin('clean-css')
+    })
+
+    // 图片加版本号
+    .match('image', {
+        useHash : true
+    })
+
+    // png优化
+    .match('*.png', {
+        optimizer : fis.plugin('png-compressor')
+    })
+
+    // 发布路径
+    .match('*', {
+        release : '$0',
+        deploy : fis.plugin('local-deliver', {
+            to : '/fis/online'
+        })
+    });
+
+// 线上环境
 fis.media('online')
     // js压缩、加版本号
     .match('*.js', {
@@ -94,7 +136,7 @@ fis.media('online')
         optimizer : fis.plugin('png-compressor')
     })
 
-    // 重新定义发布路径
+    // 定义发布路径
     .match('*', {
         release : '$0',
         deploy : fis.plugin('local-deliver', {
