@@ -54,7 +54,6 @@ fis.media('debug')
 
     // 发布路径
     .match('*', {
-        release : '$0',
         deploy : fis.plugin('local-deliver', {
             to : '/fis/debug'
         })
@@ -64,7 +63,6 @@ fis.media('debug')
 fis.media('local')
     // 发布路径
     .match('*', {
-        release : '$0',
         deploy : fis.plugin('local-deliver', {
             to : '/fis/local'
         })
@@ -74,7 +72,6 @@ fis.media('local')
 fis.media('test')
     // 发布路径
     .match('*', {
-        release : '$0',
         deploy : fis.plugin('local-deliver', {
             to : '/fis/test'
         })
@@ -106,9 +103,8 @@ fis.media('sim')
 
     // 发布路径
     .match('*', {
-        release : '$0',
         deploy : fis.plugin('local-deliver', {
-            to : '/fis/online'
+            to : '/fis/sim'
         })
     });
 
@@ -138,9 +134,13 @@ fis.media('online')
 
     // 定义发布路径
     .match('*', {
-        release : '$0',
         deploy : fis.plugin('local-deliver', {
             to : '/fis/online'
         })
     });
+
+// 按项目输出
+fis.match('*', {
+    release : '${project}/$0'
+});
 
