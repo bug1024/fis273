@@ -6,7 +6,7 @@ fis.cli.info = require('./package.json');
 // 忽略文件
 fis.set('project.ignore', [
     'output/**',
-    'node_nodules/**',
+    'node_modules/**',
     '.git/**',
     'fis273-conf.js',
     '.svn/**',
@@ -40,7 +40,15 @@ fis
         useMap : true
     })
 
-    // 模块化加载方式 modJS
+    // tpl2js
+    .match('*.tpl', {
+        useMap: true,
+        rExt: '.js',
+        isJsLike: true,
+        parser: fis.plugin('tpl')
+    })
+
+// 模块化加载方式 modJS
     .hook('module', {
         mod : 'commonJS'
     });
