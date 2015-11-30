@@ -45,10 +45,10 @@ fis
         useMap: true,
         rExt: '.js',
         isJsLike: true,
-        parser: fis.plugin('tpl')
+        parser: fis.plugin('tpl2js')
     })
 
-// 模块化加载方式 modJS
+    // 模块化加载方式 modJS
     .hook('module', {
         mod : 'commonJS'
     });
