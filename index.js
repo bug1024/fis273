@@ -104,10 +104,10 @@ fis.media('sim')
         useHash : true
     })
 
-    // png优化
-    .match('*.png', {
-        optimizer : fis.plugin('png-compressor')
-    })
+    // png优化 该选项引起过core dump 故废除
+    //.match('*.png', {
+    //    optimizer : fis.plugin('png-compressor')
+    //})
 
     // 发布路径
     .match('*', {
@@ -135,10 +135,10 @@ fis.media('online')
         useHash : true
     })
 
-    // png优化
-    .match('*.png', {
-        optimizer : fis.plugin('png-compressor')
-    })
+    // png优化 该选项引起过core dump 故废除
+    //.match('*.png', {
+    //    optimizer : fis.plugin('png-compressor')
+    //})
 
     // 定义发布路径
     .match('*', {
